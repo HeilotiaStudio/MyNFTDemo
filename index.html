@@ -28,22 +28,9 @@
     <img src="nft3.png" alt="NFT 3">
     <button onclick="buyNFT(3)">Buy NFT #3</button>
   </div>
-
-  <script>
-    async function buyNFT(id) {
-      // simple alert for demo
-      alert(`This would call the smart contract to buy NFT #${id}`);
-
-      // Example ethers.js code (uncomment if you have a contract deployed on testnet)
-      
-      if (typeof window.ethereum !== 'undefined') {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        const signer = provider.getSigner();
-
-        // replace with your contract address and ABI
-        const contractAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
-        const contractABI = [
+<script>
+  const contractAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4"; // Replace with your deployed address
+const abi = [
 	{
 		"inputs": [
 			{
@@ -668,24 +655,28 @@
 	}
 ];
 
-        const contract = new ethers.Contract(contractAddress, contractABI, signer);
+// Connect to the contract (e.g., in a browser with MetaMask)
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider.getSigner();
+const contract = new ethers.Contract(contractAddress, abi, signer);
 
-        try {
-          const tx = await contract.buyNFT(id, { value: ethers.utils.parseEther("0.01") });
-          await tx.wait();
-          alert(`NFT #${id} bought!`);
-        } catch(e) {
-          console.error(e);
-          alert('Transaction failed');
-        }
-      } else {
-        alert('MetaMask not detected');
-      }
-      
-    }
-  </script>
+// Example: Call `buyNFT` (payable function)
+async function buyNFT() {
+  const tx = await contract.buyNFT({ value: ethers.utils.parseEther("0.01") });
+  await tx.wait();
+  console.log("NFT bought!");
+}
+
+// Example: Call `mintNFT` (owner-only function)
+async function mintNFT(toAddress) {
+  const tx = await contract.mintNFT(toAddress);
+  await tx.wait();
+  console.log("NFT minted to:", toAddress);
+}
+	</script>
 </body>
 </html>
+
 
 
 
