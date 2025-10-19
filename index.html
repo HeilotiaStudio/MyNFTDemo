@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple NFT Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    .nft { display: inline-block; margin: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 10px; }
+    img { width: 200px; height: 300px; display: block; margin-bottom: 10px; }
+    button { padding: 10px 15px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>My NFT Marketplace Demo</h1>
+
+  <div class="nft">
+    <img src="nft1.png" alt="NFT 1">
+    <button onclick="buyNFT(1)">Buy NFT #1</button>
+  </div>
+
+  <div class="nft">
+    <img src="nft2.png" alt="NFT 2">
+    <button onclick="buyNFT(2)">Buy NFT #2</button>
+  </div>
+
+  <div class="nft">
+    <img src="nft3.png" alt="NFT 3">
+    <button onclick="buyNFT(3)">Buy NFT #3</button>
+  </div>
+
+  <script>
+    async function buyNFT(id) {
+      // simple alert for demo
+      alert(`This would call the smart contract to buy NFT #${id}`);
+
+      // Example ethers.js code (uncomment if you have a contract deployed on testnet)
+      /*
+      if (typeof window.ethereum !== 'undefined') {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+
+        // replace with your contract address and ABI
+        const contractAddress = "0xYourContractAddress";
+        const contractABI = [ /* ABI here */ /* ];
+
+        const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        try {
+          const tx = await contract.buyNFT(id, { value: ethers.utils.parseEther("0.01") });
+          await tx.wait();
+          alert(`NFT #${id} bought!`);
+        } catch(e) {
+          console.error(e);
+          alert('Transaction failed');
+        }
+      } else {
+        alert('MetaMask not detected');
+      }
+      */
+    }
+  </script>
+</body>
+</html>
+
