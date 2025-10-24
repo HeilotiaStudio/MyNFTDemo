@@ -13,7 +13,9 @@
   
  
 </head>
-  <!-- Sidebar -->
+
+<body>
+	  <!-- Sidebar -->
   <nav class="sidebar">
     <h2>TalesWorld</h2>
     <a href="#">Home</a>
@@ -21,7 +23,7 @@
     <a href="#">Contracts</a>
     <a href="#">About</a>
   </nav>
-<body>
+  <!-- Main content -->
   <main>
     <h1>My NFT Marketplace Demo</h1>
 
@@ -42,15 +44,17 @@
 
     <br>
     <button id="resetButton" onclick="resetInstallPrompt()">Reset Install Prompt</button>
-    <br>
-    <input id="talesInput" type="text" placeholder="Enter Taleslang input...">
-  </main>
 
-  <footer>
-    <p>Author: Tales of Heilotia — 
-      <a href="https://www.youtube.com/@TalesOfHeilotia" target="_blank">My YouTube</a>
-    </p>
-  </footer>
+    <div id="talesInputContainer">
+      <input id="talesInput" type="text" placeholder="Enter Taleslang input...">
+    </div>
+
+    <footer>
+      <p>Author: Tales of Heilotia — 
+        <a href="https://www.youtube.com/@TalesOfHeilotia" target="_blank">My YouTube</a>
+      </p>
+    </footer>
+  </main>
 
   <script src="app.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -58,6 +62,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
 
