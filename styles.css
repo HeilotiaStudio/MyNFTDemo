@@ -1,1 +1,57 @@
+   body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
+    main {
+      flex: 1;
+      padding-top: 50px;
+    }
+
+    .nft { 
+      display: inline-block; 
+      margin: 20px; 
+      border: 1px solid #ccc; 
+      padding: 10px; 
+      border-radius: 10px; 
+    }
+
+    img { 
+      width: 200px; 
+      height: 300px; 
+      display: block; 
+      margin-bottom: 10px; 
+    }
+
+    button { 
+      padding: 10px 15px; 
+      font-size: 16px; 
+      cursor: pointer; 
+    }
+
+    #resetButton {
+      margin-top: 40px;
+      padding: 10px 25px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #talesInput {
+      margin-top: 15px;
+      padding: 8px;
+      width: 250px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+    }
+
+    footer {
+      background-color: #f8f9fa;
+      padding: 15px 0;
+      margin-top: auto;
+    }
