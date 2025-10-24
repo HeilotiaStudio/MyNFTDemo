@@ -70,17 +70,17 @@
      margin-top: auto; /* pushes it to the bottom */
 }
 footer p {
-  color: #ddd;
+  color: #00bfff;
    left: 25px;
 }
 
 footer a {
-  color: #ddd;
+  color: #00bfff;
   text-decoration: none;
 }
 
 footer a:hover {
- color: #fff;
+  color:  orange;
 }
 
 /* Sidebar */
