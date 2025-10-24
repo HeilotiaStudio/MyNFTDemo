@@ -58,12 +58,14 @@
        vertical-align: top;
     }
 
-    footer {
-      background-color: #f8f9fa;
-      padding: 15px 0;
-      margin-top: 100px;
-      /* padding-left: 240px;*/
-    }
+  footer {
+  background-color: #f8f9fa;
+  padding: 15px 0;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
 
 /* Sidebar */
 .sidebar {
