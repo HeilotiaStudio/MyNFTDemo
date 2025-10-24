@@ -55,3 +55,42 @@
       padding: 15px 0;
       margin-top: auto;
     }
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #222;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.sidebar h2 {
+  color: #00bfff;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  color: #ddd;
+  text-decoration: none;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #00bfff;
+  color: #fff;
+}
+
+/* Adjust main to not hide behind sidebar */
+main {
+  margin-left: 240px;
+}
