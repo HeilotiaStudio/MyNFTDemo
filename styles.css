@@ -54,6 +54,8 @@
        height: 150px;
       border-radius: 6px;
       border: 1px solid #aaa;
+       text-align: left;
+       vertical-align: top;
     }
 
     footer {
