@@ -90,7 +90,4 @@
   color: #fff;
 }
 
-/* Adjust main to not hide behind sidebar */
-main {
-  margin-left: 240px;
-}
+
