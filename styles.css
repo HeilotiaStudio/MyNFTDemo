@@ -8,11 +8,15 @@
       flex-direction: column;
     }
 
-    main {
-      flex: 1;
-      padding-top: 50px;
+   main {
+  flex: 1;
+  margin-left: 240px; /* keeps content from hiding under sidebar */
+  text-align: center;
+  padding: 40px;
+}
+
        
-    }
+    
 
     .nft { 
       display: inline-block; 
