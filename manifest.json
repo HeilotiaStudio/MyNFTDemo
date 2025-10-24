@@ -1,12 +1,12 @@
 {
   "short_name": "MyNFT Demo app",
-  "name": "Markuss app (add to homescreen test page)",
+  "name": "MyNFT app (add to homescreen test page)",
   "display": "standalone",
-  "start_url": "/MarkusPWA/?source=pwa",
-  "id": "/MarkusPWA/?source=pwa",
+  "start_url": "/MyNFTDemo/?source=pwa",
+  "id": "/MyNFTDemo/?source=pwa",
   "icons": [
     {
-      "src": "/MarkusPWA/apple-touch-icon.png",
+      "src": "/MyNFTDemo/apple-touch-icon.png",
       "sizes": "any",
       "type": "image/png",
       "purpose": "any"
