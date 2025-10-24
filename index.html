@@ -4,54 +4,113 @@
   <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Simple NFT Demo</title>
-	  <link rel="icon" href="apple-touch-icon.png" type="image/png">
+  <link rel="icon" href="apple-touch-icon.png" type="image/png">
 	<link rel="stylesheet" href="styles.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="manifest" crossorigin="use-credentials" href="manifest.json" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@2.91/dist/add-to-homescreen.min.css"
-  />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="manifest" crossorigin="use-credentials" href="manifest.json" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@2.91/dist/add-to-homescreen.min.css" />
   <script src="https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@2.91/dist/add-to-homescreen.min.js"></script>
+  
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-    .nft { display: inline-block; margin: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 10px; }
-    img { width: 200px; height: 300px; display: block; margin-bottom: 10px; }
-    button { padding: 10px 15px; font-size: 16px; cursor: pointer; }
+    body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+      padding-top: 50px;
+    }
+
+    .nft { 
+      display: inline-block; 
+      margin: 20px; 
+      border: 1px solid #ccc; 
+      padding: 10px; 
+      border-radius: 10px; 
+    }
+
+    img { 
+      width: 200px; 
+      height: 300px; 
+      display: block; 
+      margin-bottom: 10px; 
+    }
+
+    button { 
+      padding: 10px 15px; 
+      font-size: 16px; 
+      cursor: pointer; 
+    }
+
+    #resetButton {
+      margin-top: 40px;
+      padding: 10px 25px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #talesInput {
+      margin-top: 15px;
+      padding: 8px;
+      width: 250px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+    }
+
+    footer {
+      background-color: #f8f9fa;
+      padding: 15px 0;
+      margin-top: auto;
+    }
   </style>
 </head>
+
 <body>
-  <h1>My NFT Marketplace Demo</h1>
+  <main>
+    <h1>My NFT Marketplace Demo</h1>
 
-  <div class="nft">
-    <img src="Minka1.jpg" alt="NFT 1">
-    <button onclick="buyNFT(1)">Buy NFT #1</button>
-  </div>
+    <div class="nft">
+      <img src="Minka1.jpg" alt="NFT 1">
+      <button onclick="buyNFT(1)">Buy NFT #1</button>
+    </div>
 
-  <div class="nft">
-    <img src="slicer.jpg" alt="NFT 2">
-    <button onclick="buyNFT(2)">Buy NFT #2</button>
-  </div>
+    <div class="nft">
+      <img src="slicer.jpg" alt="NFT 2">
+      <button onclick="buyNFT(2)">Buy NFT #2</button>
+    </div>
 
-  <div class="nft">
-    <img src="beast nr1.jpg" alt="NFT 3">
-    <button onclick="buyNFT(3)">Buy NFT #3</button>
-  </div>
-	<br>
- <button onclick="resetInstallPrompt()">Reset Install Prompt</button>
+    <div class="nft">
+      <img src="beast nr1.jpg" alt="NFT 3">
+      <button onclick="buyNFT(3)">Buy NFT #3</button>
+    </div>
 
-	
-	<script src="app.js"></script>
-	  <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <br>
+    <button id="resetButton" onclick="resetInstallPrompt()">Reset Install Prompt</button>
+    <br>
+    <input id="talesInput" type="text" placeholder="Enter Taleslang input...">
+  </main>
+
+  <footer>
+    <p>Author: Tales of Heilotia — 
+      <a href="https://www.youtube.com/@TalesOfHeilotia" target="_blank">My YouTube</a>
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-	<footer>
-  <center><p>Author: Tales of Heilotia — <a href="https://www.youtube.com/@TalesOfHeilotia"> My Youtube</a>
-</p></center>
-</footer>
 </html>
+
+
 
 
 
