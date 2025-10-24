@@ -1,5 +1,5 @@
 {
-  "short_name": "Markuss app",
+  "short_name": "MyNFT Demo app",
   "name": "Markuss app (add to homescreen test page)",
   "display": "standalone",
   "start_url": "/MarkusPWA/?source=pwa",
