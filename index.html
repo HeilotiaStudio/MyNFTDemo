@@ -30,6 +30,8 @@
      <div id="cookie-banner" style="background:#272626; color:#00bfff; padding:10px; text-align:center; display:none;">
   We use cookies to improve your experience. 🍪
   <button onclick="acceptCookies()">Got it!</button>
+		 <button onclick="collectVisitorInfo()">Download Visitor Info (CSV)</button>
+
 </div>
     <h1>My NFT Marketplace Demo</h1>
 
@@ -55,6 +57,13 @@
      <textarea id="talesInput" placeholder="Enter Taleslang input..."></textarea>
     </div>
 
+
+ <footer>
+      <p>Author: Tales of Heilotia — 
+        <a href="https://www.youtube.com/@TalesOfHeilotia" target="_blank">My YouTube</a>
+      </p>
+    </footer>
+  </main>
 <script>
 function collectVisitorInfo() {
   const data = {
@@ -79,16 +88,6 @@ function collectVisitorInfo() {
   URL.revokeObjectURL(url);
 }
 </script>
-
-<button onclick="collectVisitorInfo()">Download Visitor Info (CSV)</button
-	  
-    <footer>
-      <p>Author: Tales of Heilotia — 
-        <a href="https://www.youtube.com/@TalesOfHeilotia" target="_blank">My YouTube</a>
-      </p>
-    </footer>
-  </main>
-
   <script src="app.js"></script>
 	 <script src="cookie.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -96,6 +95,7 @@ function collectVisitorInfo() {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
 
