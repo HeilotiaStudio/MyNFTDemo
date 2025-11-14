@@ -16,7 +16,7 @@ document.getElementById("subscribeBtn").addEventListener("click", async () => {
 
   try {
     // Register the service worker
-    const register = await navigator.serviceWorker.register("/MyNFTdemo/sw.js", {
+    const register = await navigator.serviceWorker.register("/MyNFTDemo/sw.js", {
       scope: "/MyNFTDemo/"
     });
 
