@@ -32,28 +32,30 @@
   <button onclick="acceptCookies()">Got it!</button>
 		 <button onclick="collectVisitorInfo()">Download Visitor Info (CSV)</button>
 </div>
-
-<div id="car-toast" class="toast">
-  <img src="apple-touch-icon.png" alt="icon">
-  <span id="toast-message">Thank you for visiting!</span>
-  <span class="close-btn">&times;</span>
+<div id="nft-modal-overlay" class="nft-modal-overlay">
+  <div class="nft-modal">
+    <img src="apple-touch-icon.png" class="modal-icon" alt="icon">
+    <p id="nft-modal-text">Placeholder text</p>
+    <button id="nft-modal-close">Close</button>
+  </div>
 </div>
+
 	  
     <h1>My NFT Marketplace Demo</h1>
 
     <div class="nft">
       <img src="Minka1.jpg" alt="NFT 1">
-      <button onclick="triggerNotification(1)">Buy NFT #1</button>
+      <button onclick="buyNFT(1)">Buy NFT #1</button>
     </div>
 
     <div class="nft">
       <img src="slicer.jpg" alt="NFT 2">
-      <button onclick="triggerNotification(2)">Buy NFT #2</button>
+      <button onclick="buyNFT(2)">Buy NFT #2</button>
     </div>
 
     <div class="nft">
       <img src="beast nr1.jpg" alt="NFT 3">
-      <button onclick="triggerNotification(3)">Buy NFT #3</button>
+      <button onclick="buyNFT(3)">Buy NFT #3</button>
     </div>
 
 
@@ -71,30 +73,7 @@
       </p>
     </footer>
   </main>
- <!--<script>
-function collectVisitorInfo() {
-  const data = {
-    timestamp: new Date().toISOString(),
-    userAgent: navigator.userAgent,
-    language: navigator.language,
-    screenWidth: window.screen.width,
-    screenHeight: window.screen.height,
-    platform: navigator.platform
-  };
 
-  // Convert object to CSV string
-  const csv = Object.keys(data).join(",") + "\n" + Object.values(data).join(",") + "\n";
-
-  // Download CSV file locally
-  const blob = new Blob([csv], { type: "text/csv" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "visitor_info.csv";
-  a.click();
-  URL.revokeObjectURL(url);
-}
-</script>-->
   <script src="app.js"></script>
 	 <script src="cookie.js"></script>
 	<script src="info.js"></script>
@@ -105,6 +84,7 @@ function collectVisitorInfo() {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
 
