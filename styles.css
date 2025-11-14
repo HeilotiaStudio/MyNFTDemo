@@ -118,4 +118,47 @@ footer a:hover {
   color: #fff;
 }
 
+/* Modal overlay hidden by default */
+.nft-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6); /* semi-transparent black */
+  display: none; /* hide initially */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.nft-modal-overlay.show {
+  display: flex; /* show when .show is added */
+}
+
+.nft-modal {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#nft-modal-close {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#nft-modal-close:hover {
+  background-color: #0056b3;
+}
+
+
 
