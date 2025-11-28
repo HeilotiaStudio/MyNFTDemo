@@ -59,20 +59,22 @@
 
 <script>
 function buyNFT(button, nftId) {
-  // Optional: disable button immediately to prevent double click
-  button.disabled = true;
+  button.disabled = true; // stop double clicks
 
-  // Simulate a delay (e.g., for a transaction)
+  // your existing buying logic can go here
+  // e.g., call your wallet or backend API
+  console.log("Processing NFT #" + nftId);
+
+  // 1-second delay for effect or animation
   setTimeout(() => {
-    // Change button text and style
     button.textContent = "Owned";
     button.style.backgroundColor = "black";
     button.style.color = "#00bfff";
     button.style.cursor = "not-allowed";
 
-    // Call your actual buy logic here if needed
+    // continue any post-purchase logic here
     console.log("NFT #" + nftId + " purchased!");
-  }, 1000); // 1-second delay
+  }, 1000);
 }
 </script>
 
@@ -101,6 +103,7 @@ function buyNFT(button, nftId) {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
 
