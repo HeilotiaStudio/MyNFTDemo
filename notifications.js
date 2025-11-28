@@ -15,24 +15,27 @@ document.addEventListener("DOMContentLoaded", () => {
   closeBtn.addEventListener("click", () => overlay.classList.remove("show"));
 
   // Buy NFT function
-  window.buyNFT = function(id, button) {
+  window.buyNFT = function(id) {
     showModal(`You bought NFT #${id}! 🚀`);
 
-    // UI change after 1-second delay
-    if (button) {
-      button.disabled = true; // disable immediately
-      setTimeout(() => {
-        button.textContent = "Owned";
-        button.style.backgroundColor = "black";
-        button.style.color = "#00bfff";
-        button.style.cursor = "not-allowed";
-      }, 1000);
-    }
-
-    // Optional: push notification or server call here
+    // Find the button that was clicked
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach(btn => {
+      if (btn.textContent.includes(`Buy NFT #${id}`)) {
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = "Owned";
+          btn.style.backgroundColor = "black";
+          btn.style.color = "#00bfff";
+          btn.style.cursor = "not-allowed";
+        }, 1000);
+      }
+    });
   };
 });
 </script>
+
+
 
 
 
