@@ -17,6 +17,23 @@ document.addEventListener("DOMContentLoaded", () => {
   window.buyNFT = function(id) {
     showModal(`You bought NFT #${id}! 🚀`);
 
+     // Map NFT IDs to Google Drive file IDs
+  const nftFiles = {
+    1: "1qR5u2v9eML1Gc7B4Egk1htWjccsjayd6",
+   // 2: "GOOGLE_DRIVE_FILE_ID_2",
+   // 3: "GOOGLE_DRIVE_FILE_ID_3"
+  };
+
+  // Trigger download
+  if (nftFiles[id]) {
+    const a = document.createElement("a");
+    a.href = `https://drive.google.com/uc?export=download&id=${nftFiles[id]}`;
+    a.download = `NFT_${id}.jpg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
     // Find the button that was clicked
     const buttons = document.querySelectorAll("button");
     buttons.forEach(btn => {
@@ -33,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 });
+
 
 
 
