@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         setTimeout(() => {
           btn.textContent = "Owned";
-          btn.style.backgroundColor = "black";
+          btn.style.backgroundColor = "#222";
           btn.style.color = "#00bfff";
           btn.style.cursor = "not-allowed";
           btn.disabled = true;
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 });
+
 
 
 
