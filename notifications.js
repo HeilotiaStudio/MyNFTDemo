@@ -22,18 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll("button");
     buttons.forEach(btn => {
       if (btn.textContent.includes(`Buy NFT #${id}`)) {
-        btn.disabled = true;
+        
         setTimeout(() => {
           btn.textContent = "Owned";
           btn.style.backgroundColor = "black";
           btn.style.color = "#00bfff";
           btn.style.cursor = "not-allowed";
+          btn.disabled = true;
         }, 1000);
       }
     });
   };
 });
 </script>
+
 
 
 
