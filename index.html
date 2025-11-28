@@ -39,24 +39,42 @@
     <button id="nft-modal-close">Close</button>
   </div>
 </div>
-	  
-    <h1>My NFT Marketplace Demo</h1>
 
-    <div class="nft">
-      <img src="Minka1.jpg" alt="NFT 1">
-      <button onclick="buyNFT(1)">Buy NFT #1</button>
-    </div>
+	  <h1>My NFT Marketplace Demo</h1>
 
-    <div class="nft">
-      <img src="slicer.jpg" alt="NFT 2">
-      <button onclick="buyNFT(2)">Buy NFT #2</button>
-    </div>
+<div class="nft">
+  <img src="Minka1.jpg" alt="NFT 1">
+  <button onclick="buyNFT(this, 1)">Buy NFT #1</button>
+</div>
 
-    <div class="nft">
-      <img src="beast nr1.jpg" alt="NFT 3">
-      <button onclick="buyNFT(3)">Buy NFT #3</button>
-    </div>
+<div class="nft">
+  <img src="slicer.jpg" alt="NFT 2">
+  <button onclick="buyNFT(this, 2)">Buy NFT #2</button>
+</div>
 
+<div class="nft">
+  <img src="beast nr1.jpg" alt="NFT 3">
+  <button onclick="buyNFT(this, 3)">Buy NFT #3</button>
+</div>
+
+<script>
+function buyNFT(button, nftId) {
+  // Optional: disable button immediately to prevent double click
+  button.disabled = true;
+
+  // Simulate a delay (e.g., for a transaction)
+  setTimeout(() => {
+    // Change button text and style
+    button.textContent = "Owned";
+    button.style.backgroundColor = "black";
+    button.style.color = "#00bfff";
+    button.style.cursor = "not-allowed";
+
+    // Call your actual buy logic here if needed
+    console.log("NFT #" + nftId + " purchased!");
+  }, 1000); // 1-second delay
+}
+</script>
 
     <br>
     <button id="resetButton" onclick="resetInstallPrompt()">Reset Install Prompt</button>
@@ -83,6 +101,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
 
