@@ -57,19 +57,6 @@
   <button onclick="buyNFT(this, 3)">Buy NFT #3</button>
 </div>
 
-<script>
-function buyNFT(button, nftId) {
-  button.disabled = true; // prevent double clicks immediately
-
-  setTimeout(() => {
-    button.textContent = "Owned";          // change button text
-    button.style.backgroundColor = "black"; // black background
-    button.style.color = "#00bfff";         // blue text
-    button.style.cursor = "not-allowed";    // show as disabled
-  }, 1000); // 1-second delay
-
-}
-</script>
 
     <br>
     <button id="resetButton" onclick="resetInstallPrompt()">Reset Install Prompt</button>
@@ -96,6 +83,7 @@ function buyNFT(button, nftId) {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
 
