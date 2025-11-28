@@ -1,4 +1,3 @@
-<script>
 document.addEventListener("DOMContentLoaded", () => { 
   const overlay = document.getElementById("nft-modal-overlay");
   const modalText = document.getElementById("nft-modal-text");
@@ -34,7 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 });
-</script>
+
+
 
 
 
