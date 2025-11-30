@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      // Replace this URL with your deployed Google Apps Script Web App URL
-      const endpoint = "https://script.google.com/macros/s/AKfycbwevOgjFH06VIzNWJqiMl7ZbiDchwZyDJ2N6Y_WBhM/exec";
+      // Your real Google Apps Script endpoint
+      const endpoint = "https://script.google.com/macros/s/AKfycbyO79tn2pT_zIbCXKUMQL9-xGpX_4Bbp0PL_MI3bGBY3wrf2eQmixkZOitIsTEdigZL/exec";
 
       const response = await fetch(endpoint, {
         method: "POST",
@@ -45,4 +45,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
