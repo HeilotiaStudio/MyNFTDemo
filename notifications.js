@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
      // Map NFT IDs to Google Drive file IDs
   const nftFiles = {
     1: "1qR5u2v9eML1Gc7B4Egk1htWjccsjayd6",
-   // 2: "GOOGLE_DRIVE_FILE_ID_2",
-   // 3: "GOOGLE_DRIVE_FILE_ID_3"
+    2: "1aiX1qS9BYWxOdvYYyNp59PXTjcEDiiYD",
+    3: "1T_yH6AeLPUyHm9VamiWm2nhHtqmo83Mb"
   };
 
   // Trigger download
@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 });
+
 
 
 
