@@ -12,6 +12,7 @@ document.getElementById("registerBtn").addEventListener("click", async () => {
 
   const res = await fetch("/.netlify/functions/register", {
     method: "POST",
+    headers: { "Content-Type": "application/json" },  // ← REQUIRED
     body: JSON.stringify({
       firstName,
       lastName,
