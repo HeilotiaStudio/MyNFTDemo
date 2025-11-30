@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // Replace this URL with your deployed Google Apps Script Web App URL
-      const endpoint = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+      const endpoint = "https://script.google.com/macros/s/AKfycbwevOgjFH06VIzNWJqiMl7ZbiDchwZyDJ2N6Y_WBhM/exec";
 
       const response = await fetch(endpoint, {
         method: "POST",
