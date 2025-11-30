@@ -1,30 +1,48 @@
-document.getElementById("registerBtn").addEventListener("click", async () => {
-  const firstName = document.getElementById("firstName").value;
-  const lastName = document.getElementById("lastName").value;
-  const email = document.getElementById("inputEmail").value;
-  const password = document.getElementById("inputPassword").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
+document.addEventListener("DOMContentLoaded", () => {
+  const registerBtn = document.getElementById("registerBtn");
 
-  if (password !== confirmPassword) {
-    alert("Passwords do not match!");
-    return;
-  }
+  registerBtn.addEventListener("click", async (e) => {
+    e.preventDefault(); // prevent default form submission
 
-  const res = await fetch("/.netlify/functions/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },  // ← REQUIRED
-    body: JSON.stringify({
-      firstName,
-      lastName,
-      email,
-      password
-    })
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const email = document.getElementById("inputEmail").value.trim();
+    const password = document.getElementById("inputPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (!firstName || !lastName || !email || !password) {
+      alert("Please fill in all fields!");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      // Replace this URL with your deployed Google Apps Script Web App URL
+      const endpoint = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, lastName, email, password })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Account created! Wallet hash: " + data.walletHash);
+        window.location.href = "login.html"; // redirect to login page
+      } else {
+        alert("Error: " + data.message);
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while registering.");
+    }
   });
-
-  const data = await res.json();
-  alert(data.message);
-
-  if (data.success) {
-    window.location.href = "login.html";
-  }
 });
+
