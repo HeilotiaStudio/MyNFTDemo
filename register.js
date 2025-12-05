@@ -1,19 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const registerBtn = document.getElementById("registerBtn");
 
-  const supabaseUrl = "https://hpribgbrwyljorezjwsp.supabase.co";
-  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwcmliZ2Jyd3lsam9yZXpqd3NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ4ODYzNzUsImV4cCI6MjA4MDQ2MjM3NX0.SmjSKDXGD4WeLvNQooBuV9ZkihATaz4cUXt39_IQMss";
-  const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
-
-  // SHA hashing function
-  async function sha256(text) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(text);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-  }
-
   registerBtn.addEventListener("click", async (e) => {
     e.preventDefault();
 
@@ -27,47 +14,49 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please fill in all fields!");
       return;
     }
-
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
+    // Hash the password
+    const passwordHash = await sha256(password);
+
     // Generate wallet hash
-    const walletHash = await sha256(email + Date.now());
+    const walletHash = await sha256(firstName + lastName + email);
 
-    // 1) Create Supabase Auth user
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    // Insert into Supabase
+    const { error } = await supabase
+      .from("profiles")
+      .insert([
+        {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password_hash: passwordHash,
+          wallet_hash: walletHash
+        }
+      ]);
 
-    if (authError) {
-      alert("Error: " + authError.message);
+    if (error) {
+      alert("Supabase error: " + error.message);
+      console.error(error);
       return;
     }
 
-    const userId = authData.user.id;
-
-    // 2) Insert extra profile data including wallet hash
-    const { error: insertError } = await supabase.from("profiles").insert([
-      {
-        id: userId,
-        first_name: firstName,
-        last_name: lastName,
-        wallet_hash: walletHash
-      }
-    ]);
-
-    if (insertError) {
-      alert("Profile save error: " + insertError.message);
-      return;
-    }
-
-    alert("Account created! Wallet hash saved.");
+    alert("Account created! Wallet hash: " + walletHash);
     window.location.href = "login.html";
   });
 });
+
+// SHA-256 for browser
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
 
 
 
