@@ -5,6 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
   } else {
     document.getElementById("wallet").textContent = sessionData.walletHash;
-    document.getElementById("user-email").textContent = sessionData.user.email;
+    //document.getElementById("user-email").textContent = sessionData.user.email;
   }
 });
