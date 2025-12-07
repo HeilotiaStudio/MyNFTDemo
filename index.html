@@ -65,10 +65,18 @@
     <div id="talesInputContainer">
      <textarea id="talesInput" placeholder="Enter Taleslang input..."></textarea>
     </div>
+	  
 <p id="wallet"></p>
 	  <p id="user-email"></p>
 	  <script src="session.js"></script>
 
+	   <script>
+    // Initialize Supabase in browser
+    window.supabase = supabase.createClient(
+      "https://hpribgbrwyljorezjwsp.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwcmliZ2Jyd3lsam9yZXpqd3NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ4ODYzNzUsImV4cCI6MjA4MDQ2MjM3NX0.SmjSKDXGD4WeLvNQooBuV9ZkihATaz4cUXt39_IQMss"
+    );
+  </script>
  <footer>
       <p>Author: Tales of Heilotia — 
         <a href="https://www.youtube.com/@TalesOfHeilotia" target="_blank">My YouTube</a>
@@ -86,6 +94,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
 
