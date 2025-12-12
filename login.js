@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }));
 
     // Redirect to profile page
-    window.location.href = "index.html";
+    window.location.href = "profile.html";
   });
 });
 
