@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landing Page</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #0d0d0f;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+  }
+
+  .left {
+    max-width: 45%;
+    animation: slideLeft 1.2s ease forwards;
+    opacity: 0;
+  }
+
+  .left h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+
+  .left p {
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    background: #00bfff;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: #0099cc;
+  }
+
+  .right img {
+    width: 420px;
+    border-radius: 12px;
+    opacity: 0;
+    animation: fadeUp 1.4s ease forwards;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @keyframes slideLeft {
+    from { transform: translateX(-40px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="left">
+    <h1>Welcome to NFT Hub</h1>
+    <p>Collect, buy and store your digital assets in one secure place.</p>
+    <button class="btn">Enter</button>
+  </div>
+
+  <div class="right">
+    <img src="https://images.unsplash.com/photo-1679339618073-e4a91935d3c3?q=80&w=600" alt="NFT Image">
+  </div>
+
+</div>
+
+</body>
+</html>
