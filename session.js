@@ -1,10 +1,25 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", async () => { 
   const sessionData = JSON.parse(localStorage.getItem("supabaseSession"));
-localStorage.removeItem("supabaseSession");
+
+  // For testing: clear session to force redirect
+  localStorage.removeItem("supabaseSession");
+
   if (!sessionData) {
     window.location.href = "login.html";
     return;
   }
+
+   //Optionally, enforce 1-hour session expiry (commented out for now)
+  
+  const sessionStart = new Date(sessionData.createdAt).getTime();
+  const now = Date.now();
+  const oneHour = 60 * 60 * 1000; // 1 hour in ms
+  if (now - sessionStart > oneHour) {
+    localStorage.removeItem("supabaseSession");
+    window.location.href = "login.html";
+    return;
+  }
+  
 
   document.getElementById("wallet").textContent = sessionData.walletHash;
 
@@ -28,4 +43,34 @@ localStorage.removeItem("supabaseSession");
       }
     });
   }
+
+  // Session countdown timer
+  
+  const timerEl = document.getElementById("timer");
+  if (timerEl) {
+    // Default 1 hour for timer display
+    const sessionDuration = 60 * 60 * 1000; // 1 hour in ms
+    const start = Date.now(); // you could replace with sessionData.createdAt if available
+    const sessionEnd = start + sessionDuration;
+
+    function updateTimer() {
+      const now = Date.now();
+      const diff = sessionEnd - now;
+
+      if (diff <= 0) {
+        timerEl.textContent = "00:00";
+        localStorage.removeItem("supabaseSession");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const minutes = Math.floor(diff / 1000 / 60).toString().padStart(2, "0");
+      const seconds = Math.floor((diff / 1000) % 60).toString().padStart(2, "0");
+      timerEl.textContent = `${minutes}:${seconds}`;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  }
 });
+
