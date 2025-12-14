@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-   //Optionally, enforce 1-hour session expiry (commented out for now)
+   //Optionally, enforce 1-hour session expiry 
   
   const sessionStart = new Date(sessionData.createdAt).getTime();
   const now = Date.now();
