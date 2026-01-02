@@ -87,16 +87,15 @@ function parseTaleslang(text) {
    EXECUTION + CSV HISTORY
 =========================== */
 
-async function executeCommand(cmd, userId) {
+async function executeCommand(cmd) {
   if (cmd.owner !== "auto") {
     throw new Error("Manual owner assignment is not allowed");
   }
 
-  // Insert coin
   const { error } = await supabase
     .from("coins")
     .insert({
-      user_id: userId,
+      user_id: "00000000-0000-0000-0000-000000000000", // dummy UUID
       name: cmd.name,
       amount: cmd.amount,
       mintable: cmd.mintable
@@ -105,6 +104,8 @@ async function executeCommand(cmd, userId) {
   if (error) {
     throw new Error(error.message);
   }
+}
+
 
   // Plain CSV history for public log
   // Format: timestamp,user_id,action,name,amount,mintable
