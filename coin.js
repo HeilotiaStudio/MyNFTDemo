@@ -11,12 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const session = JSON.parse(localStorage.getItem("supabaseSession"));
-    if (!session) {
-      alert("Session expired. Please login again.");
-      window.location.href = "login.html";
-      return;
-    }
+ 
 
     try {
       const command = parseTaleslang(raw);
