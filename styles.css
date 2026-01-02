@@ -160,7 +160,6 @@ footer a:hover {
   background-color: #0056b3;
 }
 
-/* Container stays the same */
 #talesInputContainer {
   max-width: 600px;
   margin: 0 auto;
@@ -171,14 +170,11 @@ footer a:hover {
 
 /* Editor wrapper */
 .dsl-editor {
-  position: relative;
   width: 100%;
-  min-height: 140px;
 }
 
-/* Shared styles for textarea + pre */
-.dsl-editor textarea,
-.dsl-editor pre {
+/* Make textarea the main visible editor */
+.dsl-editor textarea {
   font-family: monospace;
   font-size: 14px;
   line-height: 1.4;
@@ -187,44 +183,20 @@ footer a:hover {
   min-height: 140px;
   box-sizing: border-box;
 
-  /* These fix the border mismatch */
-  border: 1px solid #444;
-  border-radius: 6px;
-}
-
-/* Textarea sits on top, invisible text but visible caret */
-.dsl-editor textarea {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  background: transparent;
-  color: transparent;       /* hide text */
-  caret-color: #00bfff;     /* visible caret */
-
-  resize: none;
-  border: none;             /* remove double border */
-  outline: none;
-  z-index: 2;
-}
-
-/* Pre behind it shows highlighted text */
-.dsl-editor pre {
   background: #1e1e1e;
   color: #ccc;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  z-index: 1;
-  pointer-events: none;
+  border: 1px solid #444;
+  border-radius: 6px;
+  resize: vertical;
 }
 
-/* Highlight colors */
-.kw {
-  color: #00bfff;
-  font-weight: bold;
+/* Hide the pre for now (we can use it later if needed) */
+.dsl-editor pre {
+  display: none;
 }
 
-.key {
-  color: #ffcc00;
+/* Button full width */
+#parseCoinBtn {
+  width: 100%;
 }
 
