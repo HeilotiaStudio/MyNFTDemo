@@ -62,11 +62,16 @@
     <br>
     <button id="resetButton" onclick="resetInstallPrompt()">Reset Install Prompt</button>
 <button id="subscribeBtn">Subscribe to Notifications</button>
+	  
     <div id="talesInputContainer">
-     <textarea id="talesInput" placeholder="Enter Taleslang input..."></textarea>
-		 <button id="parseCoinBtn" class="btn btn-primary mt-2">
-    Parse & Save Coin
-  </button>
+<div class="dsl-editor">
+  <pre id="highlight"></pre>
+  <textarea id="talesInput" placeholder="Enter Taleslang input..."></textarea>
+</div>
+
+<button id="parseCoinBtn" class="btn btn-primary mt-2">
+  Mint / Create
+</button>
     </div>
 	  
 <p id="wallet"></p>
@@ -100,6 +105,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 
 
