@@ -149,34 +149,61 @@ footer a:hover {
   background-color: #0056b3;
 }
 
+/* Container (optional, but keeps things centered nicely) */
 #talesInputContainer {
   max-width: 600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  gap: 12px;
 }
 
-.dsl-editor {
-  position: relative;
-  width: 100%;
-  min-height: 140px;
-}
-
-
-
+/* The actual editor */
 .editor {
-  background: #1e1e1e;
-  color: #ccc;
-  border: 1px solid #444;
+  background: #1e1e1e;       /* dark background */
+  color: #ccc;               /* default text color */
+  border: 1px solid #444;    /* subtle border */
   border-radius: 6px;
   padding: 12px;
-  min-height: 140px;
+  min-height: 160px;
   font-family: monospace;
+  font-size: 14px;
+  line-height: 1.4;
   white-space: pre-wrap;
+  outline: none;
 }
-.kw { color: #c678dd; font-weight: bold; }   /* purple */
-.key { color: #61afef; }                     /* blue */
-.str { color: #98c379; }                     /* green */
-.brace { color: #e5c07b; }                   /* yellow */
+
+/* Button full width */
+#parseCoinBtn {
+  width: 100%;
+  padding: 10px;
+  background: #0078ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#parseCoinBtn:hover {
+  background: #006be0;
+}
+
+/* Syntax highlight colors */
+.kw {
+  color: #c678dd; /* purple */
+  font-weight: bold;
+}
+
+.key {
+  color: #61afef; /* blue */
+}
+
+.str {
+  color: #98c379; /* green */
+}
+
+.brace {
+  color: #e5c07b; /* yellow */
+}
 
