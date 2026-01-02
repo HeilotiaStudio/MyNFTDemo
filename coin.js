@@ -92,7 +92,7 @@ async function executeCommand(cmd, userId) {
   const { error } = await supabase
     .from("coins")
     .insert({
-      user_id: userId,
+     user_id: "me",   // ⬅️ FIX: hard‑coded user
       name: cmd.name,
       amount: cmd.amount,
       mintable: cmd.mintable
