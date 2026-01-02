@@ -5,37 +5,41 @@
 const input = document.getElementById("talesInput");
 const highlight = document.getElementById("highlight");
 
-// Basic keyword highlighter
 function highlightSyntax(text) {
-  // Escape HTML so user input doesn't break the page
+  // Escape HTML
   text = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // Highlight keywords
+  // Strings → green
+  text = text.replace(/"([^"]*)"/g, '<span class="str">"$1"</span>');
+
+  // Keywords → purple
   text = text.replace(/create new/g, '<span class="kw">create new</span>');
 
-  // Highlight keys inside the DSL
+  // Keys → blue
   text = text.replace(
     /\b(type|name|ammount|mintable|owner)\b/g,
     '<span class="key">$1</span>'
   );
 
+  // Braces → yellow
+  text = text.replace(/[\{\}]/g, '<span class="brace">$&</span>');
+
   return text;
 }
 
-// Mirror textarea → pre
 input.addEventListener("input", () => {
-  const raw = input.value;
-  highlight.innerHTML = highlightSyntax(raw);
+  highlight.innerHTML = highlightSyntax(input.value);
 });
 
-// Keep scroll positions synced
 input.addEventListener("scroll", () => {
   highlight.scrollTop = input.scrollTop;
   highlight.scrollLeft = input.scrollLeft;
 });
+
+
 
 
 // ===============================
