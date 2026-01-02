@@ -104,6 +104,11 @@ async function executeCommand(cmd, userId) {
       mintable: cmd.mintable
     });
 
+  if (error && error.code === "23505") {
+    throw new Error("A coin with this name already exists");
+  }
+
+
   if (error) {
     throw new Error(error.message);
   }
