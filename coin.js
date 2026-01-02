@@ -11,11 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
- 
-
     try {
       const command = parseTaleslang(raw);
-      await executeCommand(command);
+
+      // ⬅️ NEW: get session and user ID
+      const sessionData = JSON.parse(localStorage.getItem("supabaseSession"));
+      const userId = sessionData?.user?.id;
+
+      if (!userId) {
+        throw new Error("User session missing — cannot create coin");
+      }
+
+      await executeCommand(command, userId);
+
       alert("✅ Coin created successfully");
       input.value = "";
     } catch (err) {
@@ -29,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
 =========================== */
 
 function parseTaleslang(text) {
-  // basic structure
   if (!text.startsWith("create new")) {
     throw new Error("Only 'create new' is supported");
   }
@@ -41,7 +48,6 @@ function parseTaleslang(text) {
 
   const body = bodyMatch[1];
 
-  // extract key:"value" pairs
   const regex = /(\w+)\s*:\s*"([^"]*)"/g;
   const data = {};
   let match;
@@ -50,7 +56,6 @@ function parseTaleslang(text) {
     data[match[1]] = match[2];
   }
 
-  // REQUIRED FIELDS
   const required = ["type", "name", "ammount"];
   for (const key of required) {
     if (!data[key]) {
@@ -59,7 +64,7 @@ function parseTaleslang(text) {
   }
 
   if (data.type !== "coin") {
-    throw new Error("Only type:\"coin\" is supported");
+    throw new Error('Only type:"coin" is supported');
   }
 
   const amount = parseInt(data.ammount, 10);
@@ -97,4 +102,6 @@ async function executeCommand(cmd, userId) {
     throw new Error(error.message);
   }
 }
+
+
 
