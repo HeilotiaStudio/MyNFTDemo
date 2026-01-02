@@ -1,6 +1,49 @@
+// ===============================
+// Fake Syntax Highlighting Editor
+// ===============================
+
+const input = document.getElementById("talesInput");
+const highlight = document.getElementById("highlight");
+
+// Basic keyword highlighter
+function highlightSyntax(text) {
+  // Escape HTML so user input doesn't break the page
+  text = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  // Highlight keywords
+  text = text.replace(/create new/g, '<span class="kw">create new</span>');
+
+  // Highlight keys inside the DSL
+  text = text.replace(
+    /\b(type|name|ammount|mintable|owner)\b/g,
+    '<span class="key">$1</span>'
+  );
+
+  return text;
+}
+
+// Mirror textarea → pre
+input.addEventListener("input", () => {
+  const raw = input.value;
+  highlight.innerHTML = highlightSyntax(raw);
+});
+
+// Keep scroll positions synced
+input.addEventListener("scroll", () => {
+  highlight.scrollTop = input.scrollTop;
+  highlight.scrollLeft = input.scrollLeft;
+});
+
+
+// ===============================
+// Taleslang Parser + Execution
+// ===============================
+
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("parseCoinBtn");
-  const input = document.getElementById("talesInput");
 
   if (!btn || !input) return;
 
@@ -26,15 +69,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       alert("✅ Coin created successfully");
       input.value = "";
+      highlight.innerHTML = "";
     } catch (err) {
       alert("❌ " + err.message);
     }
   });
 });
 
-/* ===========================
-   PARSER
-=========================== */
+
+// ===============================
+// PARSER
+// ===============================
 
 function parseTaleslang(text) {
   if (!text.startsWith("create new")) {
@@ -80,9 +125,11 @@ function parseTaleslang(text) {
   };
 }
 
-/* ===========================
-   EXECUTION + CSV HISTORY
-=========================== */
+
+// ===============================
+// EXECUTION + CSV HISTORY
+// ===============================
+
 async function executeCommand(cmd, userId) {
   if (cmd.owner !== "auto") {
     throw new Error("Manual owner assignment is not allowed");
@@ -92,7 +139,7 @@ async function executeCommand(cmd, userId) {
   const { error } = await supabase
     .from("coins")
     .insert({
-      user_id: "00000000-0000-0000-0000-000000000000",
+      user_id: "00000000-0000-0000-0000-000000000000", // dummy UUID
       name: cmd.name,
       amount: cmd.amount,
       mintable: cmd.mintable
@@ -102,8 +149,7 @@ async function executeCommand(cmd, userId) {
     throw new Error(error.message);
   }
 
-  // ---- CSV HISTORY (must be inside async function) ----
-
+  // CSV history
   const timestamp = new Date().toISOString();
   const action = "create_coin";
   const safeName = `"${String(cmd.name).replace(/"/g, '""')}"`;
@@ -126,6 +172,8 @@ async function executeCommand(cmd, userId) {
   if (historyError) {
     console.error("Failed to write coin history:", historyError.message);
   }
-} // <-- NOW the function ends correctly
+}
+
+
 
 
