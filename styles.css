@@ -160,23 +160,28 @@ footer a:hover {
   background-color: #0056b3;
 }
 
+/* Container stays the same */
 #talesInputContainer {
-  max-width: 600px;          /* controls overall width */
-  margin: 0 auto;            /* center horizontally */
+  max-width: 600px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: stretch;      /* button same width as editor */
+  align-items: stretch;
 }
 
+/* Editor wrapper */
 .dsl-editor {
-  position: relative;        /* REQUIRED for absolute children */
+  position: relative;
   width: 100%;
   min-height: 120px;
 }
 
+/* Button matches width */
 #parseCoinBtn {
-  width: 100%;               /* same width as editor */
+  width: 100%;
 }
+
+/* Shared styles for textarea + pre */
 .dsl-editor textarea,
 .dsl-editor pre {
   font-family: monospace;
@@ -185,25 +190,41 @@ footer a:hover {
   padding: 10px;
   width: 100%;
   min-height: 120px;
+  box-sizing: border-box;
 }
 
+/* Textarea sits on top, invisible text, visible caret */
 .dsl-editor textarea {
-  background: transparent;
-  color: transparent;
-  caret-color: #00bfff;
   position: absolute;
   top: 0;
   left: 0;
+  background: transparent;
+  color: transparent;       /* hide text */
+  caret-color: #00bfff;     /* visible caret */
+  border: none;
+  outline: none;
   resize: none;
   z-index: 2;
 }
 
+/* Pre behind it shows highlighted text */
 .dsl-editor pre {
   background: #1e1e1e;
   color: #ccc;
   white-space: pre-wrap;
   word-wrap: break-word;
+  border-radius: 4px;
   z-index: 1;
+  pointer-events: none;     /* prevents accidental selection */
 }
 
+/* Highlight colors */
+.kw {
+  color: #00bfff;
+  font-weight: bold;
+}
+
+.key {
+  color: #ffcc00;
+}
 
