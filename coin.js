@@ -83,7 +83,6 @@ function parseTaleslang(text) {
 /* ===========================
    EXECUTION + CSV HISTORY
 =========================== */
-
 async function executeCommand(cmd, userId) {
   if (cmd.owner !== "auto") {
     throw new Error("Manual owner assignment is not allowed");
@@ -93,7 +92,7 @@ async function executeCommand(cmd, userId) {
   const { error } = await supabase
     .from("coins")
     .insert({
-      user_id: "00000000-0000-0000-0000-000000000000", // dummy UUID
+      user_id: "00000000-0000-0000-0000-000000000000",
       name: cmd.name,
       amount: cmd.amount,
       mintable: cmd.mintable
@@ -103,11 +102,10 @@ async function executeCommand(cmd, userId) {
     throw new Error(error.message);
   }
 
-  // ---- CSV HISTORY (now correctly inside async function) ----
+  // ---- CSV HISTORY (must be inside async function) ----
 
   const timestamp = new Date().toISOString();
   const action = "create_coin";
-
   const safeName = `"${String(cmd.name).replace(/"/g, '""')}"`;
 
   const csvLine = [
@@ -128,13 +126,6 @@ async function executeCommand(cmd, userId) {
   if (historyError) {
     console.error("Failed to write coin history:", historyError.message);
   }
-}
-
-
-
-
-
-
-
+} // <-- NOW the function ends correctly
 
 
