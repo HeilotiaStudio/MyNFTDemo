@@ -1,6 +1,6 @@
 // ===============================
 // Fake Syntax Highlighting Editor
-// ===============================
+
 
 const input = document.getElementById("talesInput");
 const highlight = document.getElementById("highlight");
