@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const command = parseTaleslang(raw);
 
-      // ⬅️ NEW: get session and user ID
+      // Get session and user ID (Supabase Auth UUID)
       const sessionData = JSON.parse(localStorage.getItem("supabaseSession"));
       const userId = sessionData?.user?.id;
 
@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 =========================== */
 
 function parseTaleslang(text) {
+  // basic structure
   if (!text.startsWith("create new")) {
     throw new Error("Only 'create new' is supported");
   }
@@ -48,6 +49,7 @@ function parseTaleslang(text) {
 
   const body = bodyMatch[1];
 
+  // extract key:"value" pairs
   const regex = /(\w+)\s*:\s*"([^"]*)"/g;
   const data = {};
   let match;
@@ -56,6 +58,7 @@ function parseTaleslang(text) {
     data[match[1]] = match[2];
   }
 
+  // REQUIRED FIELDS
   const required = ["type", "name", "ammount"];
   for (const key of required) {
     if (!data[key]) {
@@ -80,18 +83,20 @@ function parseTaleslang(text) {
   };
 }
 
-/* 
-   EXECUTION
-*/
-async function executeCommand(cmd) {
+/* ===========================
+   EXECUTION + CSV HISTORY
+=========================== */
+
+async function executeCommand(cmd, userId) {
   if (cmd.owner !== "auto") {
     throw new Error("Manual owner assignment is not allowed");
   }
 
+  // Insert coin
   const { error } = await supabase
     .from("coins")
     .insert({
-      user_id: "me",   // ⬅️ FIX: hard‑coded user
+      user_id: userId,
       name: cmd.name,
       amount: cmd.amount,
       mintable: cmd.mintable
@@ -100,7 +105,36 @@ async function executeCommand(cmd) {
   if (error) {
     throw new Error(error.message);
   }
+
+  // Plain CSV history for public log
+  // Format: timestamp,user_id,action,name,amount,mintable
+  const timestamp = new Date().toISOString();
+  const action = "create_coin";
+
+  // escape any commas or quotes in name just in case
+  const safeName = `"${String(cmd.name).replace(/"/g, '""')}"`;
+  const csvLine = [
+    timestamp,
+    userId,
+    action,
+    safeName,
+    cmd.amount,
+    cmd.mintable
+  ].join(",");
+
+  const { error: historyError } = await supabase
+    .from("coin_history")
+    .insert({
+      entry: csvLine
+    });
+
+  if (historyError) {
+    // do not block coin creation on history failure, but log to console
+    console.error("Failed to write coin history:", historyError.message);
+  }
 }
+
+
 
 
 
