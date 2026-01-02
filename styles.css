@@ -47,17 +47,6 @@
       border: 1px solid #ccc;
     }
 
- #talesInput {
-  margin-top: 15px;
-  padding: 8px;
-  width: 350px;
-  height: 150px;
-  border-radius: 6px;
-  border: 1px solid #aaa;
-  resize: none; /* optional – disables dragging to resize */
-  font-family: inherit;
-  text-align: left;
-}
 
  footer {
   background-color: #222;
