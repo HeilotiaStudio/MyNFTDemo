@@ -160,12 +160,23 @@ footer a:hover {
   background-color: #0056b3;
 }
 
-.dsl-editor {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
+#talesInputContainer {
+  max-width: 600px;          /* controls overall width */
+  margin: 0 auto;            /* center horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;      /* button same width as editor */
 }
 
+.dsl-editor {
+  position: relative;        /* REQUIRED for absolute children */
+  width: 100%;
+  min-height: 120px;
+}
+
+#parseCoinBtn {
+  width: 100%;               /* same width as editor */
+}
 .dsl-editor textarea,
 .dsl-editor pre {
   font-family: monospace;
