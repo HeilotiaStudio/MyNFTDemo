@@ -1,25 +1,39 @@
+// ===============================
+// Contenteditable + syntax highlight
+// ===============================
+
 const editor = document.getElementById("talesInput");
 
 function highlightSyntax(text) {
+  // Escape HTML
   text = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
+  // Strings → green
   text = text.replace(/"([^"]*)"/g, '<span class="str">"$1"</span>');
+
+  // Keywords → purple
   text = text.replace(/create new/g, '<span class="kw">create new</span>');
-  text = text.replace(/\b(type|name|ammount|mintable|owner)\b/g, '<span class="key">$1</span>');
+
+  // Keys → blue
+  text = text.replace(
+    /\b(type|name|ammount|mintable|owner)\b/g,
+    '<span class="key">$1</span>'
+  );
+
+  // Braces → yellow
   text = text.replace(/[\{\}]/g, '<span class="brace">$&</span>');
 
   return text;
 }
 
+// Simple highlight on input (no caret preservation yet)
 editor.addEventListener("input", () => {
-  const pos = saveCaret(editor);
-  editor.innerHTML = highlightSyntax(editor.innerText);
-  restoreCaret(editor, pos);
+  const plain = editor.innerText;       // raw text
+  editor.innerHTML = highlightSyntax(plain);
 });
-
 
 // ===============================
 // Taleslang Parser + Execution
@@ -28,10 +42,10 @@ editor.addEventListener("input", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("parseCoinBtn");
 
-  if (!btn || !input) return;
+  if (!btn || !editor) return;
 
   btn.addEventListener("click", async () => {
-    const raw = input.value.trim();
+    const raw = editor.innerText.trim();   // use editor, not input
     if (!raw) {
       alert("Taleslang input is empty");
       return;
@@ -51,14 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
       await executeCommand(command, userId);
 
       alert("✅ Coin created successfully");
-      input.value = "";
-      highlight.innerHTML = "";
+      editor.innerHTML = "";               // clear editor
     } catch (err) {
       alert("❌ " + err.message);
     }
   });
 });
-
 
 // ===============================
 // PARSER
@@ -108,7 +120,6 @@ function parseTaleslang(text) {
   };
 }
 
-
 // ===============================
 // EXECUTION + CSV HISTORY
 // ===============================
@@ -156,6 +167,8 @@ async function executeCommand(cmd, userId) {
     console.error("Failed to write coin history:", historyError.message);
   }
 }
+
+
 
 
 
