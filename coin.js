@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const command = parseTaleslang(raw);
-      await executeCommand(command, session.user.id);
+      await executeCommand(command);
       alert("✅ Coin created successfully");
       input.value = "";
     } catch (err) {
