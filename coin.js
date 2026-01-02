@@ -1,3 +1,26 @@
+const editor = document.getElementById("talesInput");
+
+function highlightSyntax(text) {
+  text = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  text = text.replace(/"([^"]*)"/g, '<span class="str">"$1"</span>');
+  text = text.replace(/create new/g, '<span class="kw">create new</span>');
+  text = text.replace(/\b(type|name|ammount|mintable|owner)\b/g, '<span class="key">$1</span>');
+  text = text.replace(/[\{\}]/g, '<span class="brace">$&</span>');
+
+  return text;
+}
+
+editor.addEventListener("input", () => {
+  const pos = saveCaret(editor);
+  editor.innerHTML = highlightSyntax(editor.innerText);
+  restoreCaret(editor, pos);
+});
+
+
 // ===============================
 // Taleslang Parser + Execution
 // ===============================
