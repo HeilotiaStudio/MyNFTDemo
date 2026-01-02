@@ -160,5 +160,39 @@ footer a:hover {
   background-color: #0056b3;
 }
 
+.dsl-editor {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.dsl-editor textarea,
+.dsl-editor pre {
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 10px;
+  width: 100%;
+  min-height: 120px;
+}
+
+.dsl-editor textarea {
+  background: transparent;
+  color: transparent;
+  caret-color: #00bfff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  resize: none;
+  z-index: 2;
+}
+
+.dsl-editor pre {
+  background: #1e1e1e;
+  color: #ccc;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  z-index: 1;
+}
 
 
