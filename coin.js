@@ -80,11 +80,10 @@ function parseTaleslang(text) {
   };
 }
 
-/* ===========================
+/* 
    EXECUTION
-=========================== */
-
-async function executeCommand(cmd, userId) {
+*/
+async function executeCommand(cmd) {
   if (cmd.owner !== "auto") {
     throw new Error("Manual owner assignment is not allowed");
   }
@@ -92,7 +91,7 @@ async function executeCommand(cmd, userId) {
   const { error } = await supabase
     .from("coins")
     .insert({
-     user_id: "me",   // ⬅️ FIX: hard‑coded user
+      user_id: "me",   // ⬅️ FIX: hard‑coded user
       name: cmd.name,
       amount: cmd.amount,
       mintable: cmd.mintable
@@ -102,6 +101,8 @@ async function executeCommand(cmd, userId) {
     throw new Error(error.message);
   }
 }
+
+
 
 
 
