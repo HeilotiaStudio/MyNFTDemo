@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function parseTaleslang(text) {
   if (!text.startsWith("create new")) {
-    throw new Error("Only 'create new' is supported");
+    throw new Error("Only 'create new' are supported as keywords");
   }
 
   const bodyMatch = text.match(/\{([\s\S]*)\}/);
