@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sessionData = JSON.parse(localStorage.getItem("supabaseSession"));
 
   // For testing: clear session to force redirect
-  //localStorage.removeItem("supabaseSession");
+  localStorage.removeItem("supabaseSession");
 
   if (!sessionData) {
     window.location.href = "login.html";
