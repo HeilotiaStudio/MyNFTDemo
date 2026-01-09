@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!btn || !input) return;
 
   btn.addEventListener("click", async () => {
-    const raw = input.value.trim();   // textarea uses .value
+    const raw = input.value.trim();
     if (!raw) {
       alert("Taleslang input is empty");
       return;
@@ -19,18 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const command = parseTaleslang(raw);
 
-      // Get session and user ID (Supabase Auth UUID)
+      // 🔑 Get wallet hash from session (same source as UI)
       const sessionData = JSON.parse(localStorage.getItem("supabaseSession"));
-      const userId = sessionData?.user?.id;
+      const walletHash = sessionData?.walletHash;
 
-      if (!userId) {
-        throw new Error("User session missing — cannot create coin");
+      if (!walletHash) {
+        throw new Error("Wallet hash missing — cannot create coin");
       }
 
-      await executeCommand(command, userId);
+      await executeCommand(command, walletHash);
 
       alert("✅ Coin created successfully");
-      input.value = "";               // clear textarea
+      input.value = "";
     } catch (err) {
       alert("❌ " + err.message);
     }
@@ -89,25 +89,24 @@ function parseTaleslang(text) {
 // EXECUTION + CSV HISTORY
 // ===============================
 
-async function executeCommand(cmd, userId) {
+async function executeCommand(cmd, walletHash) {
   if (cmd.owner !== "auto") {
     throw new Error("Manual owner assignment is not allowed");
   }
 
-  // Insert coin
+  // Insert coin (wallet-based ownership)
   const { error } = await supabase
     .from("coins")
     .insert({
-      user_id: "00000000-0000-0000-0000-000000000000", // dummy UUID
+      wallet_hash: walletHash,
       name: cmd.name,
       amount: cmd.amount,
       mintable: cmd.mintable
     });
 
-  if (error && error.code === "23505") {
+  if (error?.code === "23505") {
     throw new Error("A coin with this name already exists");
   }
-
 
   if (error) {
     throw new Error(error.message);
@@ -120,7 +119,7 @@ async function executeCommand(cmd, userId) {
 
   const csvLine = [
     timestamp,
-    userId,
+    walletHash,
     action,
     safeName,
     cmd.amount,
@@ -137,6 +136,7 @@ async function executeCommand(cmd, userId) {
     console.error("Failed to write coin history:", historyError.message);
   }
 }
+
 
 
 
