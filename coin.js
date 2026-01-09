@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const command = parseTaleslang(raw);
 
-      // 🔑 Get wallet hash from session (same source as UI)
+      // ✅ Wallet hash comes from session (same as UI line)
       const sessionData = JSON.parse(localStorage.getItem("supabaseSession"));
       const walletHash = sessionData?.walletHash;
 
@@ -94,11 +94,11 @@ async function executeCommand(cmd, walletHash) {
     throw new Error("Manual owner assignment is not allowed");
   }
 
-  // Insert coin (wallet-based ownership)
+  // ✅ Store wallet hash in existing user_id column
   const { error } = await supabase
     .from("coins")
     .insert({
-      wallet_hash: walletHash,
+      user_id: walletHash,
       name: cmd.name,
       amount: cmd.amount,
       mintable: cmd.mintable
@@ -136,6 +136,7 @@ async function executeCommand(cmd, walletHash) {
     console.error("Failed to write coin history:", historyError.message);
   }
 }
+
 
 
 
