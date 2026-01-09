@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sessionData = JSON.parse(localStorage.getItem("supabaseSession"));
 
   // For testing: clear session to force redirect
-  localStorage.removeItem("supabaseSession");
+  //localStorage.removeItem("supabaseSession");
 
   if (!sessionData) {
     window.location.href = "login.html";
@@ -14,10 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sessionStart = new Date(sessionData.createdAt).getTime();
   const now = Date.now();
   const oneHour = 60 * 60 * 1000; // 1 hour in ms
-  localStorage.setItem("supabaseSession", JSON.stringify({
-      user: { id: data.id, email: data.email },
-      walletHash: data.wallet_hash
-    }));
+
   if (now - sessionStart > oneHour) {
     localStorage.removeItem("supabaseSession");
     window.location.href = "login.html";
