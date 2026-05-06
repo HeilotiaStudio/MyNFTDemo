@@ -12,26 +12,47 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Hash password with SHA-256 to match register.js
+    // Hash password with SHA-256
     const passwordHash = await sha256(password);
+    let userData = null;
+    let walletHash = null;
 
-    // Query Supabase
-    const { data, error } = await supabase
+    // First, try to find user in profiles table
+    const { data: profileData, error: profileError } = await supabase
       .from("profiles")
       .select("*")
       .eq("email", email)
       .eq("password_hash", passwordHash)
       .single();
 
-    if (error || !data) {
-      alert("Invalid email or password!");
-      return;
+    if (!profileError && profileData) {
+      // User found in profiles table
+      userData = { id: profileData.id, email: profileData.email };
+      walletHash = profileData.wallet_hash;
+    } else {
+      // If not found in profiles, check users table (using 'password' field)
+      const { data: userData_from_users, error: userError } = await supabase
+        .from("users")
+        .select("*")
+        .eq("email", email)
+        .eq("password", passwordHash)  // Changed from password_hash to password
+        .single();
+
+      if (!userError && userData_from_users) {
+        // User found in users table
+        userData = { id: userData_from_users.id, email: userData_from_users.email };
+        walletHash = userData_from_users.wallet_hash;
+      } else {
+        // User not found in either table
+        alert("Invalid email or password!");
+        return;
+      }
     }
 
     // Store session locally
     localStorage.setItem("supabaseSession", JSON.stringify({
-      user: { id: data.id, email: data.email },
-      walletHash: data.wallet_hash
+      user: userData,
+      walletHash: walletHash
     }));
 
     // Redirect to profile page
